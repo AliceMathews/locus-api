@@ -9,6 +9,9 @@ const express = require("express");
 const router = express.Router();
 
 module.exports = db => {
+  router.post("/login", (req, res) => {});
+  router.post("/register", (req, res) => {});
+
   // router.get("/", (req, res) => {
   //   db.query(`SELECT * FROM users;`)
   //     .then(data => {
