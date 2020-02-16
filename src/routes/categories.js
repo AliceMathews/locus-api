@@ -28,5 +28,6 @@ module.exports = db => {
       })
       .catch(e => res.status(500).json({ error: e.message }));
   });
+
   return router;
 };

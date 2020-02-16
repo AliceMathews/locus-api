@@ -20,7 +20,17 @@ const getImagesForCategory = (db, category_id) => {
 exports.getImagesForCategory = getImagesForCategory;
 
 //check if category exists
-const checkForCategory = db => {};
+const checkForCategory = (db, category_name) => {
+  let queryParams = [category_name];
+  let queryString = `
+    SELECT *
+    FROM categories
+    WHERE name = $1`;
+
+  return db.query(queryString, queryParams).then(data => {
+    return data.rows[0] || false;
+  }); ///RETURNS A PROMISE CONTAINING THE CATEGORY OR FALSE IF NOT FOUND
+};
 exports.checkForCategory = checkForCategory;
 
 //add category
