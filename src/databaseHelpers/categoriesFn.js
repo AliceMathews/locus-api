@@ -34,5 +34,16 @@ const checkForCategory = (db, category_name) => {
 exports.checkForCategory = checkForCategory;
 
 //add category
-const addCategory = db => {};
+const addCategory = (db, category) => {
+  let queryParams = [category.name, category.cover_photo_url];
+  let queryString = `
+    INSERT INTO categories
+    (name, cover_photo_url)
+    VALUES ($1, $2)
+    RETURNING *`;
+
+  return db.query(queryString, queryParams).then(data => {
+    return data.rows;
+  });
+};
 exports.addCategory = addCategory;
