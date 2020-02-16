@@ -10,9 +10,12 @@ exports.getAllCategories = getAllCategories;
 const getImagesForCategory = (db, category_id) => {
   let queryParams = [category_id];
   let queryString = `
-    SELECT * FROM images`;
+    SELECT images.*, tags.category_id
+    FROM images
+    LEFT OUTER JOIN tags on images.id = tags.image_id
+    WHERE tags.category_id = $1`;
 
-  return db.query(queryString).then(data => data.rows);
+  return db.query(queryString, queryParams).then(data => data.rows);
 };
 exports.getImagesForCategory = getImagesForCategory;
 
