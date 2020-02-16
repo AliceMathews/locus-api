@@ -7,17 +7,16 @@ const router = express.Router();
 const databaseFn = require("../databaseHelpers/categoriesFn");
 
 module.exports = db => {
+  //GET ALL IMAGES FOR GIVEN CATEGORY
   router.get("/:id/images", (req, res) => {
-    let query = `SELECT * FROM images`; //QUERY PLACEHOLDER - need to define
+    const category_id = req.params.id;
 
-    db.query(query)
-      .then(data => {
-        const images = data.rows;
+    databaseFn
+      .getImagesForCategory(db, category_id)
+      .then(images => {
         res.json({ images });
       })
-      .catch(err => {
-        res.status(500).json({ error: err.message });
-      });
+      .catch(e => res.status(500).json({ error: e.message }));
   });
 
   //GET ALL CATEGORIES
@@ -27,7 +26,7 @@ module.exports = db => {
       .then(categories => {
         res.json({ categories });
       })
-      .catch(e => res.status(500).json({ error: err.message }));
+      .catch(e => res.status(500).json({ error: e.message }));
   });
   return router;
 };
