@@ -20,6 +20,14 @@ module.exports = db => {
       });
   });
 
-  router.get("/", (req, res) => {});
+  //GET ALL CATEGORIES
+  router.get("/", (req, res) => {
+    databaseFn
+      .getAllCategories(db)
+      .then(categories => {
+        res.json({ categories });
+      })
+      .catch(e => res.status(500).json({ error: err.message }));
+  });
   return router;
 };
