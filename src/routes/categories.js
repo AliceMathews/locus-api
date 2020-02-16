@@ -4,6 +4,7 @@
 
 const express = require("express");
 const router = express.Router();
+const databaseFn = require("../databaseHelpers/categoriesFn");
 
 module.exports = db => {
   router.get("/:id/images", (req, res) => {
@@ -19,17 +20,6 @@ module.exports = db => {
       });
   });
 
-  router.get("/", (req, res) => {
-    let query = `SELECT * FROM categories`; //QUERY PLACEHOLDER - need to define
-
-    db.query(query)
-      .then(data => {
-        const categories = data.rows;
-        res.json({ categories });
-      })
-      .catch(err => {
-        res.status(500).json({ error: err.message });
-      });
-  });
+  router.get("/", (req, res) => {});
   return router;
 };
