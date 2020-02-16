@@ -30,8 +30,8 @@ CREATE TABLE images
 (
     id SERIAL PRIMARY KEY NOT NULL,
     owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-    longitude INT NOT NULL,
-    latitude INT NOT NULL,
+    longitude FLOAT NOT NULL,
+    latitude FLOAT NOT NULL,
     description TEXT,
     url TEXT NOT NULL,
     views INT,
