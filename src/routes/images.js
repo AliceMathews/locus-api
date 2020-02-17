@@ -26,7 +26,6 @@ module.exports = db => {
     imagesFn.getImageWithId(id)
       .then(result => {
         res.json(result);
-        const a = 1;
       })
       .catch(err => {
         console.log(err);

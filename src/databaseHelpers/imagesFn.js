@@ -7,10 +7,7 @@ const getImageWithId = (id) => {
     WHERE id = $1;
   `, [id])
   .then(res => {
-    return Promise.resolve(res.rows);
-  })
-  .catch(err => {
-    console.log(err);
+    return res.rows;
   });
 };
 
@@ -25,10 +22,7 @@ const addImage = (image) => {
   `, [owner_id, longitude, latitude, description, url, views])
   .then(res => {
     console.log(res.rows);
-    return Promise.resolve(res.rows);
-  })
-  .catch(err => {
-    console.log(err);
+    return res.rows;
   });
 };
 
