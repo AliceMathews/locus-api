@@ -12,10 +12,38 @@ const getUserWithUsername = (db, loginInput) => {
     if (bcrypt.compareSync(loginInput.password, res.rows[0].password)) {
       return res.rows[0];
     } else {
-      return false; //this means wrong pw
+      throw new Error("Wrong Credentials");
     }
   });
 };
+
+//Create session for user
+const createSession = (db, userInfo) => {
+  let queryParams = [userInfo.id, userInfo.authToken];
+  let queryString = `
+      INSERT INTO sessions
+      (owner_id, auth_token)
+      VALUES ($1, $2)
+      RETURNING * `;
+
+  return db.query(queryString, queryParams).then(res => {
+    return res.rows[0];
+  });
+};
+
+//Delete session for user
+const deleteSession = (db, authToken) => {
+  let queryParams = [authToken.data];
+  let queryString = `
+      DELETE FROM sessions
+      WHERE auth_token = $1
+      RETURNING * `;
+
+  return db.query(queryString, queryParams).then(res => {
+    return res.rows[0];
+  });
+};
+exports.deleteSession = deleteSession;
 
 //Get a single user from the database given their id
 const getUserWithID = (db, userID) => {
@@ -116,7 +144,8 @@ const login = async (db, userInput) => {
     if (userInfo) {
       const authToken = generateAuthToken();
       userInfo.authToken = authToken;
-      return userInfo;
+      const session = await createSession(db, userInfo);
+      return session;
     }
   } catch (err) {
     throw err;
