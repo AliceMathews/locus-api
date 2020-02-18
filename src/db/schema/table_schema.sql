@@ -51,7 +51,7 @@ CREATE TABLE tags
     id SERIAL PRIMARY KEY NOT NULL,
     image_id INTEGER REFERENCES images(id) ON DELETE CASCADE,
     category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
-    confidence INT
+    confidence FLOAT
 );
 
 -- stretch
