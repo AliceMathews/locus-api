@@ -26,6 +26,14 @@ CREATE TABLE users
     is_active BOOLEAN DEFAULT true
 );
 
+CREATE TABLE sessions
+(
+    id SERIAL PRIMARY KEY NOT NULL,
+    owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    auth_token VARCHAR(255),
+    created_at TIMESTAMP DEFAULT now()
+);
+
 CREATE TABLE images
 (
     id SERIAL PRIMARY KEY NOT NULL,
