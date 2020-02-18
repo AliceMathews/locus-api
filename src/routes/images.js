@@ -6,6 +6,9 @@ const express = require("express");
 const router = express.Router();
 
 const imagesFn = require("../databaseHelpers/imagesFn");
+const categoriesFn = require("../databaseHelpers/categoriesFn");
+const tagsFn = require('../databaseHelpers/tagsFn');
+
 const clarifaiHelper = require("../services/clarifaiHelper");
 
 module.exports = db => {
@@ -38,8 +41,9 @@ module.exports = db => {
     //upload image to firebase
   });
 
-  router.post("/", (req, res) => {
-    const { owner_id, longitude, latitude, description, url, views } = req.body;
+  router.post("/", async (req, res) => {
+    const { owner_id, longitude, latitude, description, url, views, tags } = req.body;
+
     const newImage = {
       owner_id,
       longitude,
@@ -48,14 +52,37 @@ module.exports = db => {
       url,
       views
     };
-    imagesFn
-      .addImage(newImage)
-      .then(result => {
-        res.json(result);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+
+    try {
+      const image = await imagesFn.addImage(newImage);
+
+      for (let i = 0; i < tags.length; i++) {
+        const category = await categoriesFn.checkForCategory(db, tags[i].name);
+        let category_id;
+        if (category) {
+          category_id = category.id;
+        } else {
+          const newCategory = await categoriesFn.addCategory(db, {name: tags[i].name, cover_photo_url: image.url});
+          category_id = newCategory.id;
+        }
+        const tag = {image_id: image.id, category_id, confidence: tags[i].value};
+        await tagsFn.addTag(db, tag);
+      }
+      res.json(image);
+    } catch(err) {
+      console.log(err);
+    }
+  });
+
+  router.get('/:id/tags', async (req, res) => {
+    try {
+      const id = req.params.id;
+      const tags = await tagsFn.getTagsWithImageId(db, id);
+      res.json(tags);
+    } catch(err) {
+      console.log(err);
+      res.status(404).json({ error: err});
+    }
   });
 
   return router;
