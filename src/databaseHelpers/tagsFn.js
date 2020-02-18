@@ -10,3 +10,18 @@ const addTag = (db, tag) => {
 };
 
 exports.addTag = addTag;
+
+const getTagsWithImageId = (db, id) => {
+  return db.query(`
+    SELECT categories.name
+    FROM categories
+    JOIN tags on categories.id = tags.category_id
+    JOIN images on tags.image_id = images.id
+    where images.id = $1;
+  `, [id])
+  .then(res => {
+    return res.rows;
+  });
+};
+
+exports.getTagsWithImageId = getTagsWithImageId;

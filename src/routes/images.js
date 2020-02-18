@@ -74,5 +74,16 @@ module.exports = db => {
     }
   });
 
+  router.get('/:id/tags', async (req, res) => {
+    try {
+      const id = req.params.id;
+      const tags = await tagsFn.getTagsWithImageId(db, id);
+      res.json(tags);
+    } catch(err) {
+      console.log(err);
+      res.status(404).json({ error: err});
+    }
+  });
+
   return router;
 };
