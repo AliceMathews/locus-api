@@ -17,11 +17,12 @@ module.exports = db => {
   });
 
   router.post("/login", async (req, res) => {
+    console.log(req.body);
     try {
-      const userInfo = await databaseFn.getUserWithUsername(db, req.body);
-      res.json(userInfo);
+      const sessionInfo = await databaseFn.login(db, req.body);
+      res.json(sessionInfo);
     } catch (err) {
-      console.log(err);
+      console.log("it gets thrown", err);
       res.status(404).json({ error: err.message });
     }
   });

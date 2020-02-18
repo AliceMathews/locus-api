@@ -12,11 +12,10 @@ const getUserWithUsername = (db, loginInput) => {
     if (bcrypt.compareSync(loginInput.password, res.rows[0].password)) {
       return res.rows[0];
     } else {
-      return ""; //this means wrong pw
+      return false; //this means wrong pw
     }
   });
 };
-exports.getUserWithUsername = getUserWithUsername;
 
 //Get a single user from the database given their id
 const getUserWithID = (db, userID) => {
@@ -93,3 +92,34 @@ const addUser = (db, newUserParams) => {
   });
 };
 exports.addUser = addUser;
+
+//Generate auth token
+const generateAuthToken = () => {
+  let output = "";
+  let i = 24;
+  while (i) {
+    let arr = [
+      String.fromCharCode(Math.floor(Math.random() * 9 + 48)),
+      String.fromCharCode(Math.floor(Math.random() * 25 + 97)),
+      String.fromCharCode(Math.floor(Math.random() * 25 + 65))
+    ];
+    output += arr[Math.floor(Math.random() * 3)];
+    i--;
+  }
+  return output;
+};
+
+//Log user in
+const login = async (db, userInput) => {
+  try {
+    const userInfo = await getUserWithUsername(db, userInput);
+    if (userInfo) {
+      const authToken = generateAuthToken();
+      userInfo.authToken = authToken;
+      return userInfo;
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+exports.login = login;
