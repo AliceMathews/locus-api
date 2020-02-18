@@ -21,8 +21,7 @@ const addImage = (image) => {
     RETURNING *;
   `, [owner_id, longitude, latitude, description, url, views])
   .then(res => {
-    console.log(res.rows);
-    return res.rows;
+    return res.rows[0];
   });
 };
 
