@@ -7,7 +7,7 @@ const router = express.Router();
 
 const imagesFn = require("../databaseHelpers/imagesFn");
 const categoriesFn = require("../databaseHelpers/categoriesFn");
-const tagsFn = require('../databaseHelpers/tagsFn');
+const tagsFn = require("../databaseHelpers/tagsFn");
 
 const clarifaiHelper = require("../services/clarifaiHelper");
 
@@ -22,6 +22,7 @@ module.exports = db => {
       })
       .catch(err => {
         console.log(err);
+        res.json(err);
       });
   });
 
@@ -42,15 +43,23 @@ module.exports = db => {
   });
 
   router.post("/", async (req, res) => {
-    const { owner_id, longitude, latitude, description, url, views, tags } = req.body;
+    const {
+      owner_id,
+      exif,
+      description,
+      url,
+      views,
+      tags
+    } = req.body.imageData;
+    console.log(req.body.imageData);
 
     const newImage = {
       owner_id,
-      longitude,
-      latitude,
       description,
       url,
-      views
+      views,
+      longitude: exif.GPSLongitude,
+      latitude: exif.GPSLatitude
     };
 
     try {
@@ -62,26 +71,34 @@ module.exports = db => {
         if (category) {
           category_id = category.id;
         } else {
-          const newCategory = await categoriesFn.addCategory(db, {name: tags[i].name, cover_photo_url: image.url});
+          const newCategory = await categoriesFn.addCategory(db, {
+            name: tags[i].name,
+            cover_photo_url: image.url
+          });
           category_id = newCategory.id;
         }
-        const tag = {image_id: image.id, category_id, confidence: tags[i].value};
+        const tag = {
+          image_id: image.id,
+          category_id,
+          confidence: tags[i].value
+        };
         await tagsFn.addTag(db, tag);
       }
       res.json(image);
-    } catch(err) {
+    } catch (err) {
       console.log(err);
+      res.json(err);
     }
   });
 
-  router.get('/:id/tags', async (req, res) => {
+  router.get("/:id/tags", async (req, res) => {
     try {
       const id = req.params.id;
       const tags = await tagsFn.getTagsWithImageId(db, id);
       res.json(tags);
-    } catch(err) {
+    } catch (err) {
       console.log(err);
-      res.status(404).json({ error: err});
+      res.status(404).json({ error: err });
     }
   });
 
