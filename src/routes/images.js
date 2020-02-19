@@ -51,7 +51,7 @@ module.exports = db => {
       views,
       tags
     } = req.body.imageData;
-    console.log(req.body.imageData);
+    // console.log(req.body.imageData);
 
     const newImage = {
       owner_id,
@@ -59,8 +59,14 @@ module.exports = db => {
       url,
       views,
       longitude: exif.GPSLongitude,
-      latitude: exif.GPSLatitude
+      latitude: exif.GPSLatitude,
+      aperture: exif.ApertureValue,
+      shutter_speed: exif.ShutterSpeedValue,
+      iso: exif.ISOSpeedRatings[0] || exif.ISOSpeedRatings,
+      exposure: exif.ExposureTime,
+      focul_length: exif.FocalLength
     };
+    console.log(newImage);
 
     try {
       const image = await imagesFn.addImage(newImage);
