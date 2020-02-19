@@ -18,7 +18,8 @@ module.exports = db => {
     clarifaiHelper
       .getImageTags(url)
       .then(result => {
-        res.json(result);
+        const tags = clarifaiHelper.filterImageTags(result);
+        res.json(tags);
       })
       .catch(err => {
         console.log(err);
