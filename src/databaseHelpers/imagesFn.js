@@ -31,30 +31,30 @@ const addImage = image => {
     exposure,
     focul_length
   } = image;
-  return db
-    .query(
-      `
-      INSERT INTO images (owner_id, latitude, longitude, aperture, shutter_speed, iso, exposure, focul_length, camera_make, description, url, views)
-      VALUES($1, $2, $3, $4, $5, $6)
-      RETURNING *;
-    `,
-      [
-        owner_id,
-        longitude,
-        latitude,
-        aperture,
-        shutter_speed,
-        iso,
-        exposure,
-        focul_length,
-        description,
-        url,
-        views
-      ]
-    )
-    .then(res => {
-      return res.rows[0];
-    });
+
+  let queryString = `
+    INSERT INTO images (owner_id, latitude, longitude, aperture, shutter_speed, iso, exposure, focul_length, description, url, views)
+    VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+    RETURNING *;
+    `;
+
+  let queryParams = [
+    owner_id,
+    longitude,
+    latitude,
+    aperture,
+    shutter_speed,
+    iso,
+    exposure,
+    focul_length,
+    description,
+    url,
+    views
+  ];
+
+  return db.query(queryString, queryParams).then(res => {
+    return res.rows[0];
+  });
 };
 
 exports.addImage = addImage;
