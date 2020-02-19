@@ -87,7 +87,7 @@ module.exports = db => {
       res.json(image);
     } catch (err) {
       console.log(err);
-      res.json(err);
+      res.status(500).json({ error: err.message });
     }
   });
 
