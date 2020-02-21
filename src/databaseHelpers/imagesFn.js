@@ -62,7 +62,7 @@ const addImage = image => {
 exports.addImage = addImage;
 
 const formatGPSCoords = exif => {
-  const { GPSLongitude, GPSLongitudeRef, GPSLatitude, GPSLatitudeRef } = exif;
+  let { GPSLongitude, GPSLongitudeRef, GPSLatitude, GPSLatitudeRef } = exif;
 
   if (GPSLongitudeRef === "W" && GPSLongitude > 0) {
     GPSLongitude = GPSLongitude * -1;
