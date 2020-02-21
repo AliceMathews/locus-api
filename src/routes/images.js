@@ -54,13 +54,15 @@ module.exports = db => {
     } = req.body.imageData;
     // console.log(req.body.imageData);
 
+    const { longitude, latitude } = imagesFn.formatGPSCoords(exif);
+
     const newImage = {
       owner_id,
       description,
       url,
       views,
-      longitude: exif.GPSLongitude,
-      latitude: exif.GPSLatitude,
+      longitude,
+      latitude,
       aperture: exif.ApertureValue,
       shutter_speed: exif.ShutterSpeedValue,
       iso: exif.ISOSpeedRatings[0] || exif.ISOSpeedRatings,
