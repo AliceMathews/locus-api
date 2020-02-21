@@ -1,5 +1,5 @@
 INSERT INTO images
-    (owner_id, latitude, longitude, aperture, shutter_speed, iso, exposure, focul_length, camera_make, description, url, views)
+    (owner_id, latitude, longitude, aperture, shutter_speed, iso, exposure, focal_length, camera_make, description, url, views)
 VALUES
     (1, 50.036278, -123.119603, 1.5, 0.004, 400, 0.1, 4.3, 'Canon-5D-Mark-IV', 'Brandywine Falls Provincial Park', 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/e35/50477914_374092603389221_95756748038210597_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=105&_nc_ohc=fY0UfhSRY5MAX95kU2S&oh=4999f70f86873f168a21a3d7636fbc8c&oe=5EE1CB93', 3),
     (1, 49.373019, -123.292891, 1.5, 0.004, 400, 0.1, 4.3, 'Canon-5D-Mark-IV', 'Whytecliff Park', 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/e35/51953649_607800683004431_7593307819852670582_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=111&_nc_ohc=MyKnH_sCwMYAX9xkZgd&oh=909164b581466c3dfb1fd0d92689624c&oe=5ECE8439', 3),
