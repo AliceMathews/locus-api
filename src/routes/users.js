@@ -16,7 +16,10 @@ module.exports = db => {
     }
   });
 
-  //'/user/me' uses the session auth to get user info
+  router.get("/me", (req, res) => {
+    console.log(req.header);
+    res.status(200);
+  });
 
   router.post("/login", async (req, res) => {
     try {
@@ -39,7 +42,7 @@ module.exports = db => {
       console.log(sessionInfo);
       res.json(sessionInfo);
     } catch (err) {
-      res.status(404).json({ error: err.message });
+      res.status(403).json({ error: err.message });
     }
   });
 
