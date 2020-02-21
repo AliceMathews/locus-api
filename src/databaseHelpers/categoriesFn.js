@@ -10,8 +10,9 @@ exports.getAllCategories = getAllCategories;
 const getImagesForCategory = (db, category_id) => {
   let queryParams = [category_id];
   let queryString = `
-    SELECT images.*, tags.category_id
+    SELECT images.*, tags.category_id, users.username
     FROM images
+    JOIN users on images.owner_id = users.id
     LEFT OUTER JOIN tags on images.id = tags.image_id
     WHERE tags.category_id = $1`;
 
