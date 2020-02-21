@@ -60,3 +60,18 @@ const addImage = image => {
 };
 
 exports.addImage = addImage;
+
+const formatGPSCoords = exif => {
+  const { GPSLongitude, GPSLongitudeRef, GPSLatitude, GPSLatitudeRef } = exif;
+
+  if (GPSLongitudeRef === "W" && GPSLongitude > 0) {
+    GPSLongitude = GPSLongitude * -1;
+  }
+
+  if (GPSLatitudeRef === "S" && GPSLatitude > 0) {
+    GPSLatitude = GPSLatitude * -1;
+  }
+
+  return { latitude: GPSLatitude, longitude: GPSLongitude };
+};
+exports.formatGPSCoords = formatGPSCoords;
