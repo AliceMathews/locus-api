@@ -16,12 +16,14 @@ module.exports = db => {
     }
   });
 
+  //'/user/me' uses the session auth to get user info
+
   router.post("/login", async (req, res) => {
     try {
       const sessionInfo = await databaseFn.login(db, req.body);
       res.json(sessionInfo);
     } catch (err) {
-      res.status(404).json({ error: err.message });
+      res.status(403).json({ error: err.message });
     }
   });
 
