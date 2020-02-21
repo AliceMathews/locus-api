@@ -7,6 +7,14 @@ const router = express.Router();
 const databaseFn = require("../databaseHelpers/usersFn");
 
 module.exports = db => {
+  router.get("/myInfo", async (req, res) => {
+    const result = await databaseFn.returnSessionUser(
+      db,
+      req.headers.authorization
+    );
+    res.json(result);
+  });
+
   router.get("/:id", async (req, res) => {
     try {
       const userInfo = await databaseFn.getUserWithID(db, req.params.id);
@@ -14,11 +22,6 @@ module.exports = db => {
     } catch (err) {
       console.log(err);
     }
-  });
-
-  router.get("/me", (req, res) => {
-    console.log(req.header);
-    res.status(200);
   });
 
   router.post("/login", async (req, res) => {
