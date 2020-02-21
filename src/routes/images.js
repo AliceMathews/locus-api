@@ -63,12 +63,12 @@ module.exports = db => {
       views,
       longitude,
       latitude,
-      aperture: exif.ApertureValue,
-      shutter_speed: exif.ShutterSpeedValue,
-      iso: exif.ISOSpeedRatings[0] || exif.ISOSpeedRatings,
-      exposure: exif.ExposureTime,
-      focul_length: exif.FocalLength,
-      camera_make: exif.LensModel || exif.Model
+      aperture: exif.ApertureValue || "",
+      shutter_speed: exif.ShutterSpeedValue || "",
+      iso: exif.ISOSpeedRatings[0] || exif.ISOSpeedRatings || "",
+      exposure: exif.ExposureTime || "",
+      focul_length: exif.FocalLength || "",
+      camera_make: exif.LensModel || exif.Model || ""
     };
     console.log(newImage);
 
