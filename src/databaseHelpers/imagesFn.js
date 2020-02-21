@@ -4,9 +4,10 @@ const getImageWithId = id => {
   return db
     .query(
       `
-    SELECT *
+    SELECT images.*, users.username
     FROM images
-    WHERE id = $1;
+    JOIN users ON images.owner_id = users.id
+    WHERE images.id = $1;
   `,
       [id]
     )
