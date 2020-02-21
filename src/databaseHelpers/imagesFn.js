@@ -34,7 +34,7 @@ const addImage = image => {
   } = image;
 
   let queryString = `
-    INSERT INTO images (owner_id, latitude, longitude, aperture, shutter_speed, iso, exposure, focul_length, camera_make, description, url, views)
+    INSERT INTO images (owner_id, longitude, latitude, aperture, shutter_speed, iso, exposure, focul_length, camera_make, description, url, views)
     VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
     RETURNING *;
     `;
