@@ -46,7 +46,7 @@ CREATE TABLE images
     shutter_speed FLOAT,
     iso FLOAT,
     exposure FLOAT,
-    focal_length FLOAT,
+    focul_length FLOAT,
     camera_make TEXT,
     description TEXT,
     url TEXT NOT NULL,

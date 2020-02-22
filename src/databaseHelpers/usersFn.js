@@ -152,3 +152,16 @@ const login = async (db, userInput) => {
   }
 };
 exports.login = login;
+
+const returnSessionUser = (db, token) => {
+  let queryParams = [token];
+  let queryString = `
+        SELECT username, profile_pic 
+        FROM sessions 
+        JOIN users on users.id = sessions.owner_id
+        WHERE auth_token = $1 `;
+  return db.query(queryString, queryParams).then(res => {
+    return res.rows[0];
+  });
+};
+exports.returnSessionUser = returnSessionUser;

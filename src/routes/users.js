@@ -7,6 +7,14 @@ const router = express.Router();
 const databaseFn = require("../databaseHelpers/usersFn");
 
 module.exports = db => {
+  router.get("/myInfo", async (req, res) => {
+    const result = await databaseFn.returnSessionUser(
+      db,
+      req.headers.authorization
+    );
+    res.json(result);
+  });
+
   router.get("/:id", async (req, res) => {
     try {
       const userInfo = await databaseFn.getUserWithID(db, req.params.id);
@@ -15,8 +23,6 @@ module.exports = db => {
       console.log(err);
     }
   });
-
-  //'/user/me' uses the session auth to get user info
 
   router.post("/login", async (req, res) => {
     try {
@@ -39,7 +45,7 @@ module.exports = db => {
       console.log(sessionInfo);
       res.json(sessionInfo);
     } catch (err) {
-      res.status(404).json({ error: err.message });
+      res.status(403).json({ error: err.message });
     }
   });
 
