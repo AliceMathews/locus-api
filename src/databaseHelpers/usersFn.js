@@ -163,6 +163,7 @@ const returnSessionUser = (db, token) => {
         JOIN users on users.id = sessions.owner_id
         WHERE auth_token = $1 `;
   return db.query(queryString, queryParams).then(res => {
+    console.log(res.rows);
     return res.rows[0];
   });
 };

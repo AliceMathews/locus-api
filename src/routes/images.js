@@ -8,6 +8,7 @@ const router = express.Router();
 const imagesFn = require("../databaseHelpers/imagesFn");
 const categoriesFn = require("../databaseHelpers/categoriesFn");
 const tagsFn = require("../databaseHelpers/tagsFn");
+const usersFn = require("../databaseHelpers/usersFn");
 
 const clarifaiHelper = require("../services/clarifaiHelper");
 
@@ -45,7 +46,7 @@ module.exports = db => {
 
   router.post("/", async (req, res) => {
     const {
-      owner_id,
+      owner_token,
       exif,
       description,
       url,
@@ -55,6 +56,8 @@ module.exports = db => {
     // console.log(req.body.imageData);
 
     const { longitude, latitude } = imagesFn.formatGPSCoords(exif);
+    const owner_id = await usersFn.returnSessionUser(db, owner_token).id;
+    console.log("OWNER ID", owner_id);
 
     const newImage = {
       owner_id,
