@@ -5,6 +5,7 @@
 const express = require("express");
 const router = express.Router();
 const databaseFn = require("../databaseHelpers/usersFn");
+const imagesFn = require("../databaseHelpers/imagesFn");
 
 module.exports = db => {
   router.get("/myInfo", async (req, res) => {
@@ -46,6 +47,18 @@ module.exports = db => {
       res.json(sessionInfo);
     } catch (err) {
       res.status(403).json({ error: err.message });
+    }
+  });
+
+  router.get("/:id/images", async (req, res) => {
+    const userId = req.params.id;
+    try {
+      const images = await imagesFn.getAllImagesForUser(userId)
+      console.log("images: ");
+      console.log(images);
+      res.json(images);
+    } catch(err) {
+      res.status(404).json({ error: err.message });
     }
   });
 

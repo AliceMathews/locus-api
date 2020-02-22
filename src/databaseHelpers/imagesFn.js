@@ -76,3 +76,18 @@ const formatGPSCoords = exif => {
   return { latitude: GPSLatitude, longitude: GPSLongitude };
 };
 exports.formatGPSCoords = formatGPSCoords;
+
+const getAllImagesForUser = (userId) => {
+  let queryParams = [userId];
+  let queryString = `
+    SELECT *
+    FROM images
+    WHERE owner_id = $1;
+  `;
+
+  return db.query(queryString, queryParams).then(res => {
+    return res.rows;
+  });
+};
+
+exports.getAllImagesForUser = getAllImagesForUser;

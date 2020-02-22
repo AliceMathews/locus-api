@@ -158,7 +158,7 @@ const returnSessionUser = (db, token) => {
   token = token.replace(regex, "");
   let queryParams = [token];
   let queryString = `
-        SELECT username, profile_pic
+        SELECT users.id, username, profile_pic
         FROM sessions
         JOIN users on users.id = sessions.owner_id
         WHERE auth_token = $1 `;
