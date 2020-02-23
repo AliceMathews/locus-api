@@ -43,9 +43,9 @@ io.on("connection", socket => {
   })
   socket.on("chat message", msg => {
     console.log(msg);
-    console.log(`sending mesage ${msg} to ${chatRoom}`);
+    // console.log(`sending mesage ${msg.message} to ${chatRoom} from ${msg.id}`);
     // io.emit("chat message", msg);
-    io.sockets.in(chatRoom).emit("chat message", msg);
+    io.sockets.in(chatRoom).emit("chat message", {message: msg, id: socket.id});
   });
   socket.on("disconnect", () => {
     console.log(`user disconnected`);
