@@ -66,10 +66,10 @@ module.exports = db => {
       views,
       longitude,
       latitude,
-      aperture: exif.ApertureValue || "",
-      shutter_speed: exif.ShutterSpeedValue || "",
+      aperture: exif.ApertureValue.toFixed(2) || "",
+      shutter_speed: exif.ShutterSpeedValue.toFixed(3) || "",
       iso: exif.ISOSpeedRatings[0] || exif.ISOSpeedRatings || "",
-      exposure: exif.ExposureTime || "",
+      exposure: exif.ExposureTime.toFixed(3) || "",
       focul_length: exif.FocalLength || "",
       camera_make: exif.LensModel || exif.Model || ""
     };
