@@ -4,6 +4,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const morgan = require("morgan");
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
 // PG database client/connection setup
 const db = require("./db/index");
@@ -28,9 +30,29 @@ app.use("/api/categories", categoriesRoutes(db));
 
 // Home page
 app.get("/", (req, res) => {
-  res.send("{hello: world}");
+  res.json("{hello: world}");
 });
 
-app.listen(PORT, () => {
+io.on("connection", socket => {
+  console.log("a user connected :D");
+  let chatRoom;
+  socket.on('room', (room) => {
+    socket.join(room);
+    console.log("socket joined room" + room);
+    chatRoom = room;
+  })
+  socket.on("chat message", msg => {
+    console.log(msg);
+    console.log(`sending mesage ${msg} to ${chatRoom}`);
+    // io.emit("chat message", msg);
+    io.sockets.in(chatRoom).emit("chat message", msg);
+  });
+  socket.on("disconnect", () => {
+    console.log(`user disconnected`);
+  })
+});
+
+server.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}, in ${ENV}`);
 });
+
