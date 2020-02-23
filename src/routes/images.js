@@ -56,8 +56,8 @@ module.exports = db => {
     // console.log(req.body.imageData);
 
     const { longitude, latitude } = imagesFn.formatGPSCoords(exif);
-    const owner_id = await usersFn.returnSessionUser(db, owner_token).id;
-    console.log("OWNER ID", owner_id);
+    let owner_id = await usersFn.returnSessionUser(db, owner_token);
+    owner_id = owner_id.id;
 
     const newImage = {
       owner_id,
@@ -73,7 +73,6 @@ module.exports = db => {
       focul_length: exif.FocalLength || "",
       camera_make: exif.LensModel || exif.Model || ""
     };
-    console.log(newImage);
 
     try {
       const image = await imagesFn.addImage(newImage);
