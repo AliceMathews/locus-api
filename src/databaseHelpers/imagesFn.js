@@ -59,8 +59,21 @@ const addImage = image => {
     return res.rows[0];
   });
 };
-
 exports.addImage = addImage;
+
+const deleteImage = id => {
+  let queryString = `
+    UPDATE images
+    SET is_active = false
+    WHERE images.id = $1
+    RETURNING * ;`;
+  let queryParams = [id];
+
+  return db.query(queryString, queryParams).then(res => {
+    return res.rows[0];
+  });
+};
+exports.deleteImage = deleteImage;
 
 const formatGPSCoords = exif => {
   let { GPSLongitude, GPSLongitudeRef, GPSLatitude, GPSLatitudeRef } = exif;
@@ -77,7 +90,7 @@ const formatGPSCoords = exif => {
 };
 exports.formatGPSCoords = formatGPSCoords;
 
-const getAllImagesForUser = (userId) => {
+const getAllImagesForUser = userId => {
   let queryParams = [userId];
   let queryString = `
     SELECT *
