@@ -14,7 +14,8 @@ const getImagesForCategory = (db, category_id) => {
     FROM images
     JOIN users on images.owner_id = users.id
     LEFT OUTER JOIN tags on images.id = tags.image_id
-    WHERE tags.category_id = $1`;
+    WHERE tags.category_id = $1
+    AND is_active = true`;
 
   return db.query(queryString, queryParams).then(data => data.rows);
 };

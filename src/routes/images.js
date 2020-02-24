@@ -40,6 +40,18 @@ module.exports = db => {
       });
   });
 
+  router.delete("/:id", (req, res) => {
+    const id = req.params.id;
+    imagesFn
+      .deleteImage(id)
+      .then(result => {
+        res.status(204).json({});
+      })
+      .catch(err => {
+        res.status(500).json({ error: err });
+      });
+  });
+
   router.post("/upload", (req, res) => {
     //upload image to firebase
   });
