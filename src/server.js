@@ -33,9 +33,11 @@ app.get("/", (req, res) => {
   res.json("{hello: world}");
 });
 
+let chatRoom;
+
 io.on("connection", socket => {
   console.log("a user connected :D");
-  let chatRoom;
+
   socket.on('room', (room) => {
     socket.join(room);
     console.log("socket joined room" + room);
@@ -43,7 +45,7 @@ io.on("connection", socket => {
   })
   socket.on("chat message", msg => {
     console.log(msg);
-    console.log(`sending mesage ${msg} to ${chatRoom}`);
+    console.log(`sending mesage ${msg.message} to ${chatRoom} from ${msg.id}`);
     // io.emit("chat message", msg);
     io.sockets.in(chatRoom).emit("chat message", msg);
   });
