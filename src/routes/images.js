@@ -42,14 +42,14 @@ module.exports = db => {
 
   router.delete("/:id", (req, res) => {
     const id = req.params.id;
-    console.log(id);
     imagesFn
       .deleteImage(id)
       .then(result => {
-        console.log(result);
-        res.json(result);
+        res.status(204).json({});
       })
-      .catch(err => console.log);
+      .catch(err => {
+        res.status(500).json({ error: err });
+      });
   });
 
   router.post("/upload", (req, res) => {
