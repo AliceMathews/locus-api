@@ -53,11 +53,11 @@ module.exports = db => {
   router.get("/:id/images", async (req, res) => {
     const userId = req.params.id;
     try {
-      const images = await imagesFn.getAllImagesForUser(userId)
-      console.log("images: ");
-      console.log(images);
+      const images = await imagesFn.getAllImagesForUser(userId);
+      // console.log("images: ");
+      // console.log(images);
       res.json(images);
-    } catch(err) {
+    } catch (err) {
       res.status(404).json({ error: err.message });
     }
   });
