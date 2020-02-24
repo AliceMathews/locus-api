@@ -95,7 +95,8 @@ const getAllImagesForUser = userId => {
   let queryString = `
     SELECT *
     FROM images
-    WHERE owner_id = $1;
+    WHERE owner_id = $1
+    AND is_active = true;
   `;
 
   return db.query(queryString, queryParams).then(res => {
