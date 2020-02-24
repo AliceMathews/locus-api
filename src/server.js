@@ -39,20 +39,21 @@ io.on("connection", socket => {
   console.log("a user connected :D");
   let chatRoom;
   socket.on('room', (room) => {
-    socket.join(room);
-    console.log("socket joined room" + room);
-    chatRoom = room;
-    io.sockets.in(chatRoom).emit('new person', "someone joined");
+    console.log(room);
+    socket.join(room.roomId);
+    console.log("socket joined room " + room.roomId);
+    chatRoom = room.roomId;
+    io.sockets.in(chatRoom).emit('new person', room.name);
     // console.log(`number of people in the room: ${io.sockets.clients(chatRoom).length}`);
     io.of('/').in(chatRoom).clients((err, clients) => {
       console.log(clients);
       console.log("number of people in room" + clients.length);
     })
-    // socket.leave(chatRoom);
-    io.of('/').in(chatRoom).clients((err, clients) => {
-      console.log(clients);
-      console.log("number of people in room" + clients.length);
-    })
+    // // socket.leave(chatRoom);
+    // io.of('/').in(chatRoom).clients((err, clients) => {
+    //   console.log(clients);
+    //   console.log("number of people in room" + clients.length);
+    // })
   })
   socket.on("chat message", msg => {
     console.log(msg);
@@ -60,14 +61,14 @@ io.on("connection", socket => {
     // io.emit("chat message", msg);
     io.sockets.in(chatRoom).emit("chat message", msg);
   });
-  socket.on("leave", () => {
+  socket.on("leave", (name) => {
     socket.leave(chatRoom);
     // io.of('/').in(chatRoom).clients((err, clients) => {
     //   console.log(clients);
     //   console.log("number of people in room" + clients.length);
     // });
     console.log("someone left")
-    io.sockets.in(chatRoom).emit('someone left', 'someone left');
+    io.sockets.in(chatRoom).emit('someone left', name);
   })
   socket.on("disconnect", () => {
     console.log(`user disconnected`);
