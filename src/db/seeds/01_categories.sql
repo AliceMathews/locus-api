@@ -44,7 +44,7 @@ VALUES
     (41,	'flame',	'https://locus-dev.s3.amazonaws.com/development%2Ff4sHGg.jpg'),
     (42,	'tent',	'https://locus-dev.s3.amazonaws.com/development%2FFevmaX.jpg'),
     (43,	'beach',	'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c0.0.1079.1079a/s640x640/47693146_1842059159237498_5033468090146126867_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=102&_nc_ohc=MwrAqgOWshYAX-34_V9&oh=2806d7ca4b4a5fdb46a078bd10dbafcb&oe=5EC984B6'),
-    (44	'camp',	'https://locus-dev.s3.amazonaws.com/development%2FFevmaX.jpg'),
+    (44,	'camp',	'https://locus-dev.s3.amazonaws.com/development%2FFevmaX.jpg'),
     (45,	'seashore',	'https://locus-dev.s3.amazonaws.com/development%2FFevmaX.jpg'),
     (46,	'fall',	'https://locus-dev.s3.amazonaws.com/development%2FC1cPle.jpg'),
     (47,	'leaf',	'https://locus-dev.s3.amazonaws.com/development%2FC1cPle.jpg'),
