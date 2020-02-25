@@ -65,7 +65,7 @@ module.exports = db => {
       views,
       tags
     } = req.body.imageData;
-    // console.log(req.body.imageData);
+    console.log(req.body.imageData);
 
     const { longitude, latitude } = imagesFn.formatGPSCoords(exif);
     let owner_id = await usersFn.returnSessionUser(db, owner_token);
@@ -78,12 +78,12 @@ module.exports = db => {
       views,
       longitude,
       latitude,
-      aperture: exif.ApertureValue.toFixed(2) || "",
-      shutter_speed: exif.ShutterSpeedValue.toFixed(3) || "",
-      iso: exif.ISOSpeedRatings[0] || exif.ISOSpeedRatings || "",
-      exposure: exif.ExposureTime.toFixed(3) || "",
-      focul_length: exif.FocalLength || "",
-      camera_make: exif.LensModel || exif.Model || ""
+      aperture: exif.ApertureValue || null,
+      shutter_speed: exif.ShutterSpeedValue || null,
+      // iso: exif.ISOSpeedRatings[0] || exif.ISOSpeedRatings || null,
+      exposure: exif.ExposureTime || null,
+      focul_length: exif.FocalLength || null,
+      camera_make: exif.LensModel || exif.Model || null
     };
 
     try {
