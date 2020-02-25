@@ -71,12 +71,12 @@ module.exports = db => {
     let owner_id = await usersFn.returnSessionUser(db, owner_token);
     owner_id = owner_id.id;
 
-    const aperture = exif.ApertureValue || null;
-    const shutter_speed = exif.ShutterSpeedValue || null;
-    const iso = null;
-    const exposure = exif.ExposureTime || null;
-    const focul_length = exif.FocalLength || null;
-    const camera_make = exif.LensModel || exif.Model || null;
+    let aperture = exif.ApertureValue || null;
+    let shutter_speed = exif.ShutterSpeedValue || null;
+    let iso = null;
+    let exposure = exif.ExposureTime || null;
+    let focul_length = exif.FocalLength || null;
+    let camera_make = exif.LensModel || exif.Model || null;
 
     if (aperture) {
       aperture = aperture.toFixed(2);
