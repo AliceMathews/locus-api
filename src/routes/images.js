@@ -65,11 +65,31 @@ module.exports = db => {
       views,
       tags
     } = req.body.imageData;
-    console.log(req.body.imageData);
+    // console.log(req.body.imageData);
 
     const { longitude, latitude } = imagesFn.formatGPSCoords(exif);
     let owner_id = await usersFn.returnSessionUser(db, owner_token);
     owner_id = owner_id.id;
+
+    const aperture = exif.ApertureValue || null;
+    const shutter_speed = exif.ShutterSpeedValue || null;
+    const iso = null;
+    const exposure = exif.ExposureTime || null;
+    const focul_length = exif.FocalLength || null;
+    const camera_make = exif.LensModel || exif.Model || null;
+
+    if (aperture) {
+      aperture = aperture.toFixed(2);
+    }
+    if (shutter_speed) {
+      shutter_speed = shutter_speed.toFixed(3);
+    }
+    if (exposure) {
+      exposure = exposure.toFixed(3);
+    }
+    if (exif.ISOSpeedRatings) {
+      iso = exif.ISOSpeedRatings[0] || exif.ISOSpeedRatings;
+    }
 
     const newImage = {
       owner_id,
@@ -78,13 +98,15 @@ module.exports = db => {
       views,
       longitude,
       latitude,
-      aperture: exif.ApertureValue || null,
-      shutter_speed: exif.ShutterSpeedValue || null,
-      // iso: exif.ISOSpeedRatings[0] || exif.ISOSpeedRatings || null,
-      exposure: exif.ExposureTime || null,
-      focul_length: exif.FocalLength || null,
-      camera_make: exif.LensModel || exif.Model || null
+      aperture,
+      shutter_speed,
+      iso,
+      exposure,
+      focul_length,
+      camera_make
     };
+
+    console.log(newImage);
 
     try {
       const image = await imagesFn.addImage(newImage);
