@@ -42,7 +42,7 @@ CREATE TABLE images
     owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     longitude FLOAT NOT NULL,
     latitude FLOAT NOT NULL,
-    aperture FLOAT NOT NULL,
+    aperture FLOAT,
     shutter_speed FLOAT,
     iso FLOAT,
     exposure FLOAT,

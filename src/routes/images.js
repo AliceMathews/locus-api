@@ -71,6 +71,26 @@ module.exports = db => {
     let owner_id = await usersFn.returnSessionUser(db, owner_token);
     owner_id = owner_id.id;
 
+    let aperture = exif.ApertureValue || null;
+    let shutter_speed = exif.ShutterSpeedValue || null;
+    let iso = null;
+    let exposure = exif.ExposureTime || null;
+    let focul_length = exif.FocalLength || null;
+    let camera_make = exif.LensModel || exif.Model || null;
+
+    if (aperture) {
+      aperture = aperture.toFixed(2);
+    }
+    if (shutter_speed) {
+      shutter_speed = shutter_speed.toFixed(3);
+    }
+    if (exposure) {
+      exposure = exposure.toFixed(3);
+    }
+    if (exif.ISOSpeedRatings) {
+      iso = exif.ISOSpeedRatings[0] || exif.ISOSpeedRatings;
+    }
+
     const newImage = {
       owner_id,
       description,
@@ -78,13 +98,15 @@ module.exports = db => {
       views,
       longitude,
       latitude,
-      aperture: exif.ApertureValue.toFixed(2) || "",
-      shutter_speed: exif.ShutterSpeedValue.toFixed(3) || "",
-      iso: exif.ISOSpeedRatings[0] || exif.ISOSpeedRatings || "",
-      exposure: exif.ExposureTime.toFixed(3) || "",
-      focul_length: exif.FocalLength || "",
-      camera_make: exif.LensModel || exif.Model || ""
+      aperture,
+      shutter_speed,
+      iso,
+      exposure,
+      focul_length,
+      camera_make
     };
+
+    console.log(newImage);
 
     try {
       const image = await imagesFn.addImage(newImage);
