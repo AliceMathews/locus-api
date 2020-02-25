@@ -33,46 +33,34 @@ app.get("/", (req, res) => {
   res.json("{hello: world}");
 });
 
-// let chatRoom;
 
 io.on("connection", socket => {
   console.log("a user connected :D");
+
   let chatRoom;
+
   socket.on('room', (room) => {
-    console.log(room);
     socket.join(room.roomId);
-    console.log("socket joined room " + room.roomId);
     chatRoom = room.roomId;
     io.sockets.in(chatRoom).emit('new person', room.name);
-    // console.log(`number of people in the room: ${io.sockets.clients(chatRoom).length}`);
+
     io.of('/').in(chatRoom).clients((err, clients) => {
-      console.log(clients);
       console.log("number of people in room" + clients.length);
     })
-    // // socket.leave(chatRoom);
-    // io.of('/').in(chatRoom).clients((err, clients) => {
-    //   console.log(clients);
-    //   console.log("number of people in room" + clients.length);
-    // })
-  })
+  });
+
   socket.on("chat message", msg => {
-    console.log(msg);
-    console.log(`sending mesage ${msg[0].text} to ${chatRoom} from ${msg[0].user._id}`);
-    // io.emit("chat message", msg);
     io.sockets.in(chatRoom).emit("chat message", msg);
   });
+
   socket.on("leave", (name) => {
     socket.leave(chatRoom);
-    // io.of('/').in(chatRoom).clients((err, clients) => {
-    //   console.log(clients);
-    //   console.log("number of people in room" + clients.length);
-    // });
-    console.log("someone left")
     io.sockets.in(chatRoom).emit('someone left', name);
-  })
+  });
+
   socket.on("disconnect", () => {
     console.log(`user disconnected`);
-  })
+  });
 });
 
 server.listen(PORT, () => {
