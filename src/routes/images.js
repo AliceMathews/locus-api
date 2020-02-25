@@ -24,7 +24,7 @@ module.exports = db => {
       })
       .catch(err => {
         console.log(err);
-        res.json(err);
+        res.status(500).json(err);
       });
   });
 
@@ -37,6 +37,7 @@ module.exports = db => {
       })
       .catch(err => {
         console.log(err);
+        res.status(404).json(err);
       });
   });
 

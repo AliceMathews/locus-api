@@ -39,6 +39,7 @@ io.on("connection", socket => {
 
   let chatRoom;
 
+  //When user requests to join the room
   socket.on('room', (room) => {
     socket.join(room.roomId);
     chatRoom = room.roomId;
@@ -49,15 +50,18 @@ io.on("connection", socket => {
     })
   });
 
+  //When a message is sent
   socket.on("chat message", msg => {
     io.sockets.in(chatRoom).emit("chat message", msg);
   });
 
+  //When a user leaves the room
   socket.on("leave", (name) => {
     socket.leave(chatRoom);
     io.sockets.in(chatRoom).emit('someone left', name);
   });
 
+  //When a user is disconnected
   socket.on("disconnect", () => {
     console.log(`user disconnected`);
   });
