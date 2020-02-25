@@ -9,11 +9,16 @@ const imagesFn = require("../databaseHelpers/imagesFn");
 
 module.exports = db => {
   router.get("/myInfo", async (req, res) => {
-    const result = await databaseFn.returnSessionUser(
-      db,
-      req.headers.authorization
-    );
-    res.json(result);
+    try {
+      const result = await databaseFn.returnSessionUser(
+        db,
+        req.headers.authorization
+      );
+      res.json(result);
+    } catch (err) {
+      console.log(err);
+      res.status(404).json(err);
+    }
   });
 
   router.get("/:id", async (req, res) => {
