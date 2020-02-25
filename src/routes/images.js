@@ -65,7 +65,6 @@ module.exports = db => {
       views,
       tags
     } = req.body.imageData;
-    // console.log(req.body.imageData);
 
     const { longitude, latitude } = imagesFn.formatGPSCoords(exif);
     let owner_id = await usersFn.returnSessionUser(db, owner_token);
