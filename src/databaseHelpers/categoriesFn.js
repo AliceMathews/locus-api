@@ -1,6 +1,9 @@
 //get all categories
 const getAllCategories = db => {
-  let queryString = `SELECT * FROM categories`;
+  let queryString = `
+  SELECT *
+  FROM categories
+  ORDER BY name`;
 
   return db.query(queryString).then(data => data.rows);
 };
