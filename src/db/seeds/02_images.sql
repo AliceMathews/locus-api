@@ -110,3 +110,5 @@ VALUES
     (108, 3, 49.225276, -123.001759, 4.00, 4.644, 8000, 0.04, 35, 'Canon-5D-Mark-IV', 'Metrotown Offices', 'https://locus-dev.s3.amazonaws.com/development%2Fb79hll.jpg', 3),
     (109, 3, 47.8420896, -120.6936957, 4.34, 5.644, 300, 0.021, 50, 'Canon-5D-Mark-IV', 'Wenatchee National Forest', 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/87414118_228906121607815_2890569788262887967_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=107&_nc_ohc=shRWpkB27EEAX_mJnki&oh=19125cd79579b1c48a99acb790e7920a&oe=5E85DEBB', 3),
     (110, 3, 46.5903307, 9.8176707, 4.04, 6.047, 500, 0.015, 35, 'Canon-5D-Mark-IV', 'Albulapass', 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/87663536_618857012019415_4827254475386476923_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=107&_nc_ohc=o_73WDktKJUAX-WgHIs&oh=47b2d113ff83901765ea95f495216a12&oe=5E8C1714', 3);
+
+ALTER SEQUENCE images_id_seq RESTART WITH 1000;
