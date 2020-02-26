@@ -109,12 +109,12 @@ VALUES
     (107, 1, -123.124272, 49.285621, 5.66, 11.966, 8000, 0.002, 60, 'Canon-5D-Mark-IV', 'Downtown Offices', 'https://locus-dev.s3.amazonaws.com/development%2FL6iQbr.jpg', 3),
     (108, 1, -123.001759, 49.225276, 4.00, 4.644, 8000, 0.04, 35, 'Canon-5D-Mark-IV', 'Metrotown Offices', 'https://locus-dev.s3.amazonaws.com/development%2Fb79hll.jpg', 3),
     (109, 1, -120.6936957, 47.8420896, 4.34, 5.644, 300, 0.021, 50, 'Canon-5D-Mark-IV', 'Wenatchee National Forest', 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/87414118_228906121607815_2890569788262887967_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=107&_nc_ohc=shRWpkB27EEAX_mJnki&oh=19125cd79579b1c48a99acb790e7920a&oe=5E85DEBB', 3),
-    (110, 3, 9.8176707, 46.5903307, 4.04, 6.047, 500, 0.015, 35, 'Canon-5D-Mark-IV', 'Albulapass', 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/87663536_618857012019415_4827254475386476923_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=107&_nc_ohc=o_73WDktKJUAX-WgHIs&oh=47b2d113ff83901765ea95f495216a12&oe=5E8C1714', 3),
+    (110, 1, 9.8176707, 46.5903307, 4.04, 6.047, 500, 0.015, 35, 'Canon-5D-Mark-IV', 'Albulapass', 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/87663536_618857012019415_4827254475386476923_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=107&_nc_ohc=o_73WDktKJUAX-WgHIs&oh=47b2d113ff83901765ea95f495216a12&oe=5E8C1714', 3),
     (111, 2, -0.206797, 51.436167, 1.7, 11.173, 25, 0.01, 4.25, 'iPhone XS back dual camera', 'Sunset ducks', 'https://locus-dev.s3.amazonaws.com/development%2FCdRdMr.jpg', 0),
     (112, 2, -123.138570, 49.303903, 1.7, 11.173, 25, 0.01, 4.25, 'iPhone XS back dual camera', null, 'https://locus-dev.s3.amazonaws.com/development%2FprYaRg.jpg', 0),
-    (113, 2, -123.056934, 49.158963, 1.7, 11.173, 25, 0.01, 4.25, 'iPhone XS back dual camera', 'Rubber duck party', 'https://locus-dev.s3.amazonaws.com/development%2F2zHzlD.jpg', 0),
-    (114, 2, -123.176001, 49.738171, 1.7, 11.173, 25, 0.01, 4.25, 'iPhone XS back dual camera', null, 'https://locus-dev.s3.amazonaws.com/development%2F5GsXEK.jpg', 0),
-    (115, 2, -122.192086, 47.667731, 1.7, 11.173, 25, 0.01, 4.25, 'iPhone XS back dual camera', 'Rubber duck stock room', 'https://locus-dev.s3.amazonaws.com/development%2F0Kb5ep.jpg', 0);
-    
+    (113, 3, -123.056934, 49.158963, 1.7, 11.173, 25, 0.01, 4.25, 'iPhone XS back dual camera', 'Rubber duck party', 'https://locus-dev.s3.amazonaws.com/development%2F2zHzlD.jpg', 0),
+    (114, 3, -123.176001, 49.738171, 1.7, 11.173, 25, 0.01, 4.25, 'iPhone XS back dual camera', null, 'https://locus-dev.s3.amazonaws.com/development%2F5GsXEK.jpg', 0),
+    (115, 3, -122.192086, 47.667731, 1.7, 11.173, 25, 0.01, 4.25, 'iPhone XS back dual camera', 'Rubber duck stock room', 'https://locus-dev.s3.amazonaws.com/development%2F0Kb5ep.jpg', 0);
+
 ALTER SEQUENCE images_id_seq RESTART WITH 1000;
 
