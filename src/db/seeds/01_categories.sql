@@ -93,6 +93,7 @@ VALUES
     (143,	'island',	'https://locus-dev.s3.amazonaws.com/development%2Fd8Ohu3.jpg'),
     (146,	'office',	'https://locus-dev.s3.amazonaws.com/development%2FL6iQbr.jpg'),
     (148, 'mist', 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/e35/51953649_607800683004431_7593307819852670582_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=111&_nc_ohc=MyKnH_sCwMYAX9xkZgd&oh=909164b581466c3dfb1fd0d92689624c&oe=5ECE8439'),
-    (150, 'snowy', 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/87414118_228906121607815_2890569788262887967_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=107&_nc_ohc=shRWpkB27EEAX_mJnki&oh=19125cd79579b1c48a99acb790e7920a&oe=5E85DEBB');
+    (150, 'snowy', 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/e35/p1080x1080/87414118_228906121607815_2890569788262887967_n.jpg?_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=107&_nc_ohc=shRWpkB27EEAX_mJnki&oh=19125cd79579b1c48a99acb790e7920a&oe=5E85DEBB'),
+    (151, 'duck', 'https://locus-dev.s3.amazonaws.com/development%2FCdRdMr.jpg');
 
     ALTER SEQUENCE categories_id_seq RESTART WITH 1000;
