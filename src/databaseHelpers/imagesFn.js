@@ -96,7 +96,8 @@ const getAllImagesForUser = userId => {
     SELECT *
     FROM images
     WHERE owner_id = $1
-    AND is_active = true;
+    AND is_active = true
+    ORDER BY created_at DESC;
   `;
 
   return db.query(queryString, queryParams).then(res => {
