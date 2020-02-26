@@ -115,3 +115,6 @@ VALUES
     (113, 2, -123.056934, 49.158963, 1.7, 11.173, 25, 0.01, 4.25, 'iPhone XS back dual camera', 'Rubber duck party', 'https://locus-dev.s3.amazonaws.com/development%2F2zHzlD.jpg', 0),
     (114, 2, -123.176001, 49.738171, 1.7, 11.173, 25, 0.01, 4.25, 'iPhone XS back dual camera', null, 'https://locus-dev.s3.amazonaws.com/development%2F5GsXEK.jpg', 0),
     (115, 2, -122.192086, 47.667731, 1.7, 11.173, 25, 0.01, 4.25, 'iPhone XS back dual camera', 'Rubber duck stock room', 'https://locus-dev.s3.amazonaws.com/development%2F0Kb5ep.jpg', 0);
+    
+ALTER SEQUENCE images_id_seq RESTART WITH 1000;
+
