@@ -3,6 +3,9 @@
 ## Getting Started
 
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
+   For the environment variables, you will need:
+   - Postgres SQL, you can run it locally or set up any cloud Postgres database
+   - Clarifai API key, get one at https://www.clarifai.com/
 2. Install dependencies: `npm i`
 3. To reset database: `npm run db:reset`
 4. Run the server: `npm run local`
